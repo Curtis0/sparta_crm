@@ -3,9 +3,13 @@ class CustomersController < ApplicationController
   end
 
   def new
+    @customer = Customer.new
   end
 
   def create
+    @customer = Customer.new(params_customer)
+    @customer.save
+    redirect_to @customer
   end
 
   def edit
@@ -18,5 +22,15 @@ class CustomersController < ApplicationController
   end
 
   def destroy
+  end
+
+private
+
+  def params_customer
+    params.require(customer).permit(
+      :family_name,
+      :given_name,
+      :email_string
+      )
   end
 end
