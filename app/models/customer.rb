@@ -6,6 +6,8 @@ class Customer < ActiveRecord::Base
     presence: true, length: { maximum: 20 }
   validates :email_string,
     presence: true, format: { with: VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :company_id,
+    presence: true
 
   belongs_to :company
 

@@ -4,6 +4,8 @@
       <dl>
         <dt>Family Name</dt>
         <dd><%= @customer.full_name %></dd>
+        <dt>Company Name</dt>
+        <dd><%= @customer.company.name %></dd>
         <dt>Email</dt>
         <dd><%= @customer.email_string %></dd>
       <%= link_to 'Edit', edit_customer_path %>

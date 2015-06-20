@@ -10,16 +10,20 @@
     </div>
   <% end %>
     <div class="form_group">
-    <%= f.label :family_name, "Family Name" %><br>
-    <%= f.text_field :family_name, class: "form_control" %>
+      <%= f.label :family_name, "Family Name" %><br>
+      <%= f.text_field :family_name, class: "form_control" %>
     </div>
     <div class="form_group">
-    <%= f.label :given_name, "Given Name" %><br>
-    <%= f.text_field :given_name, class: "form_control" %>
+      <%= f.label :given_name, "Given Name" %><br>
+      <%= f.text_field :given_name, class: "form_control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :company_id, "Company Name" %><br>
+      <%= f.collection_select(:company_id, Company.all, :id, :name, class: "form_control") %>
     </div>
     <div class="form_group">
-    <%= f.label :email_string, "Email" %><br>
-    <%= f.text_field :email_string, class: "form_control" %>
+      <%= f.label :email_string, "Email" %><br>
+      <%= f.text_field :email_string, class: "form_control" %>
     </div>
     <%= f.submit 'Submit' %>
 <% end %>

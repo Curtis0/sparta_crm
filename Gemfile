@@ -46,8 +46,8 @@ group :development, :test do
   gem 'faker'
   gem 'faker-japanese'
 
-  group :development do
-    gem 'rails-erd'
-  end
+  gem 'rails-erd'
+
+  gem 'ransack'
 end
 
