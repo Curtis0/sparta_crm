@@ -45,5 +45,9 @@ group :development, :test do
 
   gem 'faker'
   gem 'faker-japanese'
+
+  group :development do
+    gem 'rails-erd'
+  end
 end
 

@@ -7,8 +7,11 @@ class Customer < ActiveRecord::Base
   validates :email_string,
     presence: true, format: { with: VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
+  belongs_to :company
+
  def full_name
     full_name = family_name + given_name
     full_name
   end
+
 end
