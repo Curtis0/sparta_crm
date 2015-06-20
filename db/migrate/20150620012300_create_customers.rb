@@ -1,11 +1,12 @@
 class CreateCustomers < ActiveRecord::Migration
   def change
     create_table :customers do |t|
-      t.string :family_name
-      t.string :given_name
-      t.string :email_string
+      t.string :family_name,  null: false, length: { maximum: 20 }
+      t.string :given_name,   null: false, length: { maximum: 20 }
+      t.string :email_string, null: false
 
       t.timestamps null: false
     end
+    add_index :customers, :email_string, unique: true
   end
 end
