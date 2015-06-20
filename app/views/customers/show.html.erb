@@ -3,7 +3,7 @@
     <h1>Customer Information</h1>
       <dl>
         <dt>Family Name</dt>
-        <dd><%= @customer.family_name %><%= @customer.given_name %></dd>
+        <dd><%= @customer.full_name %></dd>
         <dt>Email</dt>
         <dd><%= @customer.email_string %></dd>
       <%= link_to 'Edit', edit_customer_path %>
