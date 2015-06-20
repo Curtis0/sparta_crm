@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   def index
+    @customers = Customer.all
   end
 
   def new
@@ -8,14 +9,25 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(params_customer)
-    @customer.save
-    redirect_to @customer
+    # the save is where validates happens
+    if @customer.save
+      redirect_to @customer
+    else
+      render :new
+    end
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
+    @customer = Customer.find(params[:id])
+    if @customer.update(params_customer)
+      redirect_to @customer
+    else
+      render 'edit'
+    end
   end
 
   def show
@@ -23,6 +35,9 @@ class CustomersController < ApplicationController
   end
 
   def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to customers_url
   end
 
 private
