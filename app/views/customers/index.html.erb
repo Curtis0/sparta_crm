@@ -1,13 +1,38 @@
 <div class="row">
-  <div class="dol-lg-12">
+  <div class="col-lg-12">
     <h1>Customer Index</h1>
+    <%= search_form_for @q do |f| %>
+      <div class="row">
+        <div class="col-sm-3">
+          <%= f.label :family_name, "Family Name" %>
+          <%= f.search_field :family_name_cont, class: "form-control"%>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :given_name, "Given Name" %>
+          <%= f.search_field :given_name_cont, class: "form-control" %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :company_name, "Company Name" %>
+          <%= f.search_field :company_name_cont, class: "form-control" %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label :email_string, "Email" %>
+          <%= f.search_field :email_string_cont, class: "form-control" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <%= f.submit 'Submit', class: "btn btn-default" %>
+        </div>
+      </div>
+    <% end %>
       <table class="table table-striped">
       <thead>
         <tr>
-          <th>Family Name</th>
-          <th>Given Name</th>
-          <th>Company Name</th>
-          <th>Email</th>
+          <th><%= sort_link(@q, :family_name, "Family Name") %></th>
+          <th><%= sort_link(@q, :given_name, "Given Name") %></th>
+          <th><%= sort_link(@q, :company_name, "Company Name") %></th>
+          <th><%= sort_link(@q, :email_string, "Email") %></th>
           <th>More Details</th>
         </tr>
       </thead>

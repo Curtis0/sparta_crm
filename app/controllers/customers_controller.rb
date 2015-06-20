@@ -1,6 +1,10 @@
 class CustomersController < ApplicationController
+  before_action :set_customer, only: [:edit, :update, :show, :destroy]
+
   def index
-    @customers = Customer.page(params[:page])
+    # @customers = Customer.page(params[:page])
+    @q = Customer.ransack(params[:q])
+    @customers = @q.result.page(params[:page])
   end
 
   def new
@@ -18,11 +22,9 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(params[:id])
   end
 
   def update
-    @customer = Customer.find(params[:id])
     if @customer.update(params_customer)
       redirect_to @customer
     else
@@ -31,13 +33,15 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Customer.find(params[:id])
   end
 
   def destroy
-    @customer = Customer.find(params[:id])
     @customer.destroy
     redirect_to customers_url
+  end
+
+  def set_customer
+    @customer = Customer.find(params[:id])
   end
 
 private
@@ -46,7 +50,8 @@ private
     params.require(:customer).permit(
       :family_name,
       :given_name,
-      :email_string
+      :email_string,
+      :company_id
       )
   end
 end
