@@ -1,2 +1,10 @@
-<h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Customer Information</h1>
+      <dl>
+        <dt>Family Name</dt>
+        <dd><%= @customer.full_name %></dd>
+        <dt>Email</dt>
+        <dd><%= @customer.email_string %></dd>
+  </div>
+</div>

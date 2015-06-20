@@ -19,6 +19,7 @@ class CustomersController < ApplicationController
   end
 
   def show
+    @customer = Customer.find(params[:id])
   end
 
   def destroy
@@ -27,7 +28,7 @@ class CustomersController < ApplicationController
 private
 
   def params_customer
-    params.require(customer).permit(
+    params.require(:customer).permit(
       :family_name,
       :given_name,
       :email_string
