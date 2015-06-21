@@ -1,5 +1,5 @@
 class Customer < ActiveRecord::Base
-  # The validate actually happens at the stage of the .save in the controller's create method
+  # validates happens at the stage of the .save in the controller's create method
   validates :family_name,
     presence: true, length: { maximum: 20 }
   validates :given_name,
