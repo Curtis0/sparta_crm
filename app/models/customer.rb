@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: customers
+#
+#  id           :integer          not null, primary key
+#  family_name  :string
+#  given_name   :string
+#  email_string :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  company_id   :integer
+#
+
 class Customer < ActiveRecord::Base
   # validates happens at the stage of the .save in the controller's create method
   validates :family_name,
@@ -12,7 +25,7 @@ class Customer < ActiveRecord::Base
   belongs_to :company
   has_many   :comments
 
- def full_name
+  def full_name
     full_name = family_name + given_name
     full_name
   end
