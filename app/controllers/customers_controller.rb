@@ -35,6 +35,9 @@ class CustomersController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    # we are going to use this in the form_for in the show file
+    @comments = Comment.where(customer_id: params[:id].to_i)
   end
 
   def destroy
