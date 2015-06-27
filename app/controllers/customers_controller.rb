@@ -6,7 +6,9 @@ class CustomersController < ApplicationController
   def index
     # @customers = Customer.page(params[:page])
     @q = Customer.ransack(params[:q])
-    @customers = @q.result.page(params[:page])
+    @customers = @q.result.includes(:comments).page(params[:page])
+    @comments = @q.result.includes(:comments ).page(params[:page])
+
   end
 
   def new
@@ -56,7 +58,9 @@ private
       :family_name,
       :given_name,
       :email_string,
-      :company_id
+      :company_id,
+      :image_url,
+      :body
       )
   end
 end

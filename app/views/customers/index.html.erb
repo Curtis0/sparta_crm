@@ -3,15 +3,15 @@
     <h1>Customer Index</h1>
     <%= search_form_for @q do |f| %>
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <%= f.label :family_name, "Family Name" %>
           <%= f.search_field :family_name_cont, class: "form-control"%>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <%= f.label :given_name, "Given Name" %>
           <%= f.search_field :given_name_cont, class: "form-control" %>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <%= f.label :company_name, "Company Name" %>
           <%= f.search_field :company_name_cont, class: "form-control" %>
         </div>
@@ -19,13 +19,19 @@
           <%= f.label :email_string, "Email" %>
           <%= f.search_field :email_string_cont, class: "form-control" %>
         </div>
+        <div class="col-sm-3">
+          <%= f.label :comment, "Comment" %>
+          <%= f.search_field :comments_body_cont, class: "form-control" %>
+        </div>
       </div>
+    <br />
       <div class="row">
         <div class="col-xs-12 text-center">
           <%= f.submit 'Submit', class: "btn btn-default" %>
         </div>
       </div>
     <% end %>
+    <br />
       <table class="table table-striped">
       <thead>
         <tr>
@@ -33,6 +39,7 @@
           <th><%= sort_link(@q, :given_name, "Given Name") %></th>
           <th><%= sort_link(@q, :company_name, "Company Name") %></th>
           <th><%= sort_link(@q, :email_string, "Email") %></th>
+          <th><%= sort_link(@q, :comments, "Comments") %></th>
           <th>More Details</th>
         </tr>
       </thead>
@@ -43,6 +50,7 @@
           <td><%= customer.given_name %></td>
           <td><%= customer.company.name %></td>
           <td><%= customer.email_string %></td>
+          <td><%= customer.comments.count %></td>
           <td><%= link_to 'Details', customer, class: "btn btn-default btn-xs" %></td>
         </tr>
         <% end %>
