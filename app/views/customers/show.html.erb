@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <h1>Customer Information</h1>
       <dl>
-        <dt>Family Name</dt>
+        <dt>Name</dt>
         <dd><%= @customer.full_name %></dd>
         <dt>Company Name</dt>
         <dd><%= @customer.company.name %></dd>
@@ -15,9 +15,28 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2>対応履歴</h2>
+    <h2>Comment History</h2>
     <% @customer.comments.each do |comment| %>
-      <p><%= comment.body %></p>
+      <div class="media">
+        <div class="media-body">
+          <p>
+            <%= simple_format(comment.body) %>
+          </p>
+            <% if comment.user.image_url.nil? %>
+              <img src="http://www.clker.com/cliparts/n/T/5/z/f/Y/image-missing-md.png" >
+               <!-- Image when user image == nil not showing. Need to find how to make it show. -->
+            <% else %>
+              <img src="<%= comment.user.image_url %>">
+              <!-- Image size too large. Find how to specify the size of the image so regardless of size it will shrink to the right size if too large and expand to the right size if too small. -->
+            <% end %>
+            <!-- Error when user comment exists and user erased. Find a way to have all comments by user deleted when user deletes account. -->
+          <p class="text-muted">
+            <%= comment.user.given_name %><%= comment.user.family_name %><br />
+            <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+            <%= link_to 'Delete', comment_path(comment), method: :delete %>
+          </p>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
@@ -27,10 +46,11 @@
   <div class="col-lg-12">
     <%= form_for @comment, url: { controller: :comments, action: :create } do |f| %>
       <div class="form-group">
-        <%= f.label :body, '対応内容' %><br />
+        <%= f.label :body, 'Comment' %><br />
         <%= f.text_area :body, class: "form-control" %>
       </div>
-      <%= f.hidden_field :customer_id, value: @customer.id %>
+      <%= f.hidden_field :customer_id,  value: @customer.id %>
+      <%= f.hidden_field :user_id,      value: current_user.id %>
       <%= f.submit "Post", class: "btn btn-default" %>
     <% end %>
   </div>
